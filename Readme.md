@@ -14,17 +14,3 @@ packages like
 * nlp for user inputs tokenization 
 * and other packages like pandas, matplotlib and seaborn are used 
 
-
-possibile areas to improve the result 
-####### need to add other local files also it should give the same output as expected as sql.....(use separate chatbot page)
-################ after completing local file uploads need to push it into hugging face streamlit site....
-
-########### need to add date columns also in the graph.......
-
-################# need to add line chart **********************
-
-############### kpi, pareto charts,histogram need to be worked and bubble.....
-######### how can we integrate this in cloud.... either deployments or data receiving anything 
-############# multi agents concepts...
-
-############## not showing all values if it excites more show it in next page in full view mode or 
