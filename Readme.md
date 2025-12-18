@@ -28,9 +28,3 @@ possibile areas to improve the result
 ############# multi agents concepts...
 
 ############## not showing all values if it excites more show it in next page in full view mode or 
-# make it as excel download option
-
-
-# rupee , usd conversions... check karo....(its representing usd if needed we can change it in prompt)
-
-# nlp integration...!!!!!!!!! if necessary.....
