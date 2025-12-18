@@ -16,12 +16,23 @@ import os
 # from langchain_core.messages import HumanMessage
 # import sqlite3
 # import sqlalchemy
+# from langchain_nvidia_ai_endpoints import ChatNVIDIA
 load_dotenv()
-os.environ['api_key']= os.getenv('Groq_api_key')
-llm = ChatGroq(groq_api_key = os.environ['api_key'],model="openai/gpt-oss-120b")
-# llm = OllamaLLM(model="gemma:2b")
-st.title('Q&A Chatbot')
 
+os.environ['api_key_groq']= os.getenv('Groq_api_key')
+os.environ['api_key_huggingface'] = os.getenv('Hugging_face_api')
+
+llm = ChatGroq(groq_api_key = os.environ['api_key_groq'],model="openai/gpt-oss-120b")
+# llm = OllamaLLM(model="gemma:2b")
+# os.environ['NVIDIA_API'] = os.getenv('NVIDIA_api_key')
+
+# llm = ChatNVIDIA(model="meta/llama-3.3-70b-instruct",
+#   api_key=os.environ['NVIDIA_API'], 
+#   temperature=0.2,
+#   top_p=0.7,
+#   max_completion_tokens=1024,)
+
+st.title('Q&A Chatbot')
 
 if "show_db_form" not in st.session_state:
     st.session_state.show_db_form = False
@@ -157,6 +168,7 @@ def extract_assistant_text(engine, table_list,tables=None):
             both_table = SQLDatabase(engine=engine,
                             include_tables=[table_name, table_name_second])
             sql_tool_both = QuerySQLDataBaseTool(db=both_table)
+            agent = create_agent(llm, tools=[sql_tool_both])
             agent_tables = create_agent(llm, tools=[sql_tool_both])
             st.session_state.agents = agent_tables 
 
@@ -186,13 +198,13 @@ def extract_assistant_text(engine, table_list,tables=None):
             show the results in table.
             """
             response = None
-            if agent != None:
+            if st.button and agent != None:
                 response = agent.invoke({
                     "messages": [
                         {"role": "user", "content": prompt}
                     ]
                 })
-            elif agent_tables != None:
+            elif st.button and agent_tables != None:
                 response = agent_tables.invoke({
                     "messages": [
                         {"role": "user", "content": prompt}
@@ -376,3 +388,10 @@ def extract_assistant_text(engine, table_list,tables=None):
 
 extract_assistant_text(st.session_state["engine"],st.session_state["table_list"])
             
+
+
+########### monitor groq tokens and implement langsmith monitoring 
+############ still having the problems like again and again running the user prompt while selecting the chart type
+########## will this rectify using multiple agents 
+############# Nvidia NIM not satsfied with the results, since it fails in accuracy 
+
