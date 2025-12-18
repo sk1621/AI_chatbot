@@ -57,10 +57,10 @@ if st.button("➕ DB Connect"):
 
 if st.session_state.show_db_form:
     user = st.sidebar.text_input("Username", value="root")
-    password = st.sidebar.text_input("Password", value="root")
+    password = st.sidebar.text_input("Password")
     host = st.sidebar.text_input("Host", value="localhost")
     port = st.sidebar.number_input("Port", value=3306, step=1)
-    database = st.sidebar.text_input("Database name",value='new_db')
+    database = st.sidebar.text_input("Database name")
     st.session_state.connect_clicked = st.sidebar.button("Connect")
 
 if st.session_state.connect_clicked and st.session_state.engine is None and database.strip():
@@ -75,7 +75,7 @@ if st.session_state.connect_clicked and st.session_state.engine is None and data
         st.success(f"Connected to database: {database}")
 
     except Exception as e:
-        st.error(f"Connection failed: {e}")
+        st.error(f"Connection failed: Entered credential seems to be wrong")
 
 table_name = st.session_state.table_name
 table_name_second = st.session_state.table_name_second
