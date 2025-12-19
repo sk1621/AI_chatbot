@@ -13,4 +13,5 @@ packages like
 * langchain for integration
 * nlp for user inputs tokenization 
 * and other packages like pandas, matplotlib and seaborn are used 
-* used hugging face and groq api keys 
+* used hugging face and groq api keys
+* used hugging face for deployment 
