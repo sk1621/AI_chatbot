@@ -15,13 +15,13 @@ jobs:
 
       - name: Configure git
         run: |
-          git config user.name "Jhonny"
+          git config user.name "Johnny"
           git config user.email "saranvicky2000@gmail.com"
 
       - name: Push to Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote remove hf || true
-          git remote add hf https://Ramanaaa:${HF_TOKEN}@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist
+          git remote set-url hf https://Ramanaaa:${HF_TOKEN}@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist \
+            || git remote add hf https://Ramanaaa:${HF_TOKEN}@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist
           git push hf HEAD:main
