@@ -1,42 +1,20 @@
-name: Sync to Hugging Face Hub
-
+name: Sync to Hugging Face hub
 on:
   push:
-    branches:
-      - master
-      - main
+    branches: [main]
+
+  # to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout GitHub repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Configure git
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-
-      - name: Clone Hugging Face Space
+          lfs: true
+      - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git clone https://Ramanaaa:${HF_TOKEN}@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist hf_space
-
-      - name: Sync files to HF Space
-        run: |
-          rsync -av --exclude='.git' ./ hf_space/
-
-      - name: Push to Hugging Face Space
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          cd hf_space
-          git add .
-          git commit -m "Auto-sync from GitHub" || echo "No changes to commit"
-          git push
+        run: git push https://Ramanaaa:$HF_TOKEN@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist main
