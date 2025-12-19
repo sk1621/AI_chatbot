@@ -29,3 +29,5 @@ client = ChatNVIDIA(model="qwen/qwen2.5-coder-32b-instruct",
 
 response = client.invoke([{'role':'user','content':'whats the concept of multi agents'}])
 print(response.content)
+
+# its a Nvidia API token sample model
