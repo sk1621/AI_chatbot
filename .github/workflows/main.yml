@@ -32,5 +32,5 @@ jobs:
           git config user.email "saranvicky2000@gmail.com"
           git remote remove hf || true
           git remote add hf https://Ramanaaa:${HF_TOKEN}@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist
-          git push hf HEAD:master
+          git push hf HEAD:main
 
