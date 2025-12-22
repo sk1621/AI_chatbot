@@ -1,26 +1,20 @@
-name: Sync to Hugging Face
-
+name: Sync to Hugging Face hub
 on:
   push:
-    branches: [ master ]
+    branches: [main]
+
+  # to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-  sync:
+  sync-to-hub:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Configure git
-        run: |
-          git config user.name "Johnny"
-          git config user.email "saranvicky2000@gmail.com"
-
-      - name: Push to Hugging Face
+          lfs: true
+      - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git remote add hf "https://Ramanaaa:${HF_TOKEN}@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist"
-          git push hf HEAD:main
+        run: git push https://Ramanaaa:$HF_TOKEN@huggingface.co/spaces/Ramanaaa/SQL_AI_Assist main
