@@ -1,5 +1,4 @@
 This code will execute 4 process 
-
 * one will show the answers for functions like mean,median, mode,average and describe.
 * will show the bar graph.
 * will show the summary of the given data. (what the column names tells about. how many numeircal colns, categorical colns,
@@ -14,4 +13,5 @@ packages like
 * nlp for user inputs tokenization 
 * and other packages like pandas, matplotlib and seaborn are used 
 * used hugging face and groq api keys
-* used hugging face for deployment 
+* used hugging face for deployment
+*  need to work on multi-agents
